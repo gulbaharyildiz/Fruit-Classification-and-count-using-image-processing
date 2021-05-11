@@ -1,7 +1,7 @@
-import Tkinter
+import tkinter
 import csv
-import tkFileDialog
-import tkMessageBox
+import tkinter.filedialog
+import tkinter.messagebox
 from PIL import Image, ImageTk
 import cv2
 import numpy as np
@@ -12,6 +12,7 @@ from sklearn import svm
 from sklearn.svm import SVC
 from sklearn.svm import LinearSVC
 import string
+from time import sleep
 
 filename = ""
 fr_c = 0
@@ -82,7 +83,7 @@ def read_csv(File,File1) :
          
             # extracting each data row one by one
             for col in csvreader1:    
-                lab.append(string.join(col, ""))
+                lab.append(",".join(col))
                
 
 ### load the training dataset
@@ -139,9 +140,9 @@ def read_csv(File,File1) :
 clf_svm = LinearSVC(multi_class='crammer_singer')
 
 # fit the training data and labels
-#print ("[STATUS] Fitting data/label to model..")
-File = "E:/BE_PROJECT/Working_Module/features_small.csv"
-File1 = "E:/BE_PROJECT/Working_Module/labels_small.csv"
+#prFile = "/home/pi/Desktop/Fruit-Classification-and-count-using-image-processing/features_small.csv"
+File = "/home/pi/Desktop/Fruit-Classification-and-count-using-image-processing/features_small.csv"
+File1 = "/home/pi/Desktop/Fruit-Classification-and-count-using-image-processing/labels_small.csv"
 read_csv(File,File1)
 print ("Training features: {}".format(np.array(rows).shape))
 print ("Training labels: {}".format(np.array(lab).shape))
@@ -154,52 +155,52 @@ class login:
       self.master = master
 ##      self.path = "Fruit.jpg"
       master.configure(background='sky blue')      
-      Tkinter.Label(root, text="FRUIT CLASSIFIER",font=("Mannberg",50),bg = 'sky blue',fg = 'red').place(x=415,y=150)
-      Tkinter.Label(root, text="Username",font=(10),width=10,fg='dark green',bg = 'sky blue').place(x=525,y=300)
-      Tkinter.Label(root, text="Password",font=(10),width=10,fg='dark green',bg = 'sky blue').place(x=525,y=350)
-      self.e1 = Tkinter.Entry(master,width = 20,font=(10))
-      self.e2 = Tkinter.Entry(master,width = 20,show='*',font=(10))
+      tkinter.Label(root, text="FRUIT CLASSIFIER",font=("Mannberg",50),bg = 'sky blue',fg = 'red').place(x=415,y=150)
+      tkinter.Label(root, text="Username",font=(10),width=10,fg='dark green',bg = 'sky blue').place(x=525,y=300)
+      tkinter.Label(root, text="Password",font=(10),width=10,fg='dark green',bg = 'sky blue').place(x=525,y=350)
+      self.e1 = tkinter.Entry(master,width = 20,font=(10))
+      self.e2 = tkinter.Entry(master,width = 20,show='*',font=(10))
       self.e1.pack(ipady=10)
       self.e2.pack(ipady=10) 
       self.e1.place(x=675,y=300)
       self.e2.place(x=675,y=350)
-      #Tkinter.Button(root, text='Quit', command=root.quit).place(x=800,y=500)
-      Tkinter.Button(root, text='LOGIN', command=self.show_entry_fields,width=30,bg = 'dark green',fg = 'white').place(x=600,y=400)
+      #tkinter.Button(root, text='Quit', command=root.quit).place(x=800,y=500)
+      tkinter.Button(root, text='LOGIN', command=self.show_entry_fields,width=30,bg = 'dark green',fg = 'white').place(x=600,y=400)
 
 
    def show_entry_fields(self):
       if(self.e1.get()=="fruit" and self.e2.get()=="skn"):
-                c = Tkinter.Canvas(root,height=1200,width=1920,bg = 'sky blue')
+                c = tkinter.Canvas(root,height=1200,width=1920,bg = 'sky blue')
                 c.pack()
 
-                label1 = Tkinter.Label(c, text='Selected Image', fg='white', bg='dark green',height=1,width=20,font=(1))
+                label1 = tkinter.Label(c, text='Selected Image', fg='white', bg='dark green',height=1,width=20,font=(1))
                 label1.pack()
                 c.create_window(250, 500, window=label1)
 
-                label2 = Tkinter.Label(c, text='Thresholded Image', fg='white', bg='dark green',height=1,width=20,font=(1))
+                label2 = tkinter.Label(c, text='Thresholded Image', fg='white', bg='dark green',height=1,width=20,font=(1))
                 label2.pack()
                 c.create_window(600, 500, window=label2)
 
-                label3 = Tkinter.Label(c, text='Closing Operation', fg='white', bg='dark green',height=1,width=20,font=(1))
+                label3 = tkinter.Label(c, text='Closing Operation', fg='white', bg='dark green',height=1,width=20,font=(1))
                 label3.pack()
                 c.create_window(950, 500, window=label3)
 
-                label4 = Tkinter.Label(c, text='Foreground Image', fg='white', bg='dark green',height=1,width=20,font=(1))
+                label4 = tkinter.Label(c, text='Foreground Image', fg='white', bg='dark green',height=1,width=20,font=(1))
                 label4.pack()
                 c.create_window(1300, 500, window=label4)
 
-                label5 = Tkinter.Label(c, text='FRUIT : ', fg='black', bg='indian red',height=2,width=20,font=(1))
+                label5 = tkinter.Label(c, text='FRUIT : ', fg='black', bg='indian red',height=2,width=20,font=(1))
                 label5.pack()
                 c.create_window(550, 750, window=label5)
 
-                label6 = Tkinter.Label(c, text='FRUIT COUNT : ', fg='black', bg='indian red',height=2,width=20,font=(1))
+                label6 = tkinter.Label(c, text='FRUIT COUNT : ', fg='black', bg='indian red',height=2,width=20,font=(1))
                 label6.pack()
                 c.create_window(1000, 750, window=label6)
 
-                panel1 = Tkinter.Label(root)
-                panel2 = Tkinter.Label(root)
-                panel3 = Tkinter.Label(root)
-                panel4 = Tkinter.Label(root)
+                panel1 = tkinter.Label(root)
+                panel2 = tkinter.Label(root)
+                panel3 = tkinter.Label(root)
+                panel4 = tkinter.Label(root)
                         
 
                 def select():
@@ -213,19 +214,19 @@ class login:
                                 panel2.configure(image='')
                                 panel3.configure(image='')
                                 panel4.configure(image='')
-                        filename = tkFileDialog.askopenfilename(filetypes = (("JPEG", "*.jpg;*.jpeg")
-                                                                             ,("PNG", "*.png")
-                                                                             ,("All files", "*.*") ))
+                        os.system("fswebcam -r 120x140 --no-banner test.jpg")
+                        sleep(2)
+                        filename = "test.jpg"
 
                         if(filename != ""):
 
                                 global pressed
                                 pressed = 1
                                 
-                                #Creates a Tkinter-compatible photo image, which can be used everywhere Tkinter expects an image object.
+                                #Creates a tkinter-compatible photo image, which can be used everywhere tkinter expects an image object.
                                 img1 = ImageTk.PhotoImage(file=filename)
 
-                                #The Label widget is a standard Tkinter widget used to display a text or image on the screen.
+                                #The Label widget is a standard tkinter widget used to display a text or image on the screen.
                                 panel1.configure(image=img1)
                                 panel1.image=img1
                                 #The Pack geometry manager packs widgets in rows or columns.
@@ -286,11 +287,13 @@ class login:
                             centroids = output[3]
                             fr_c= (num_labels - 1)
 
-                            fruit = string.join(z," ")
+                            #fruit = string.join(z," ")
+                            fruit = ",".join(z)
+
         
                             im2=Image.fromarray(im_th)
                             imgtk2 = ImageTk.PhotoImage(image=im2)
-                            #The Label widget is a standard Tkinter widget used to display a text or image on the screen.
+                            #The Label widget is a standard tkinter widget used to display a text or image on the screen.
                             panel2.configure(image=imgtk2)
                             panel2.image=imgtk2
                             #The Pack geometry manager packs widgets in rows or columns.
@@ -299,10 +302,10 @@ class login:
 
 
 
-                            #Creates a Tkinter-compatible photo image, which can be used everywhere Tkinter expects an image object.
+                            #Creates a tkinter-compatible photo image, which can be used everywhere tkinter expects an image object.
                             im3 = Image.fromarray(closing)
                             imgtk3 = ImageTk.PhotoImage(image=im3)
-                            #The Label widget is a standard Tkinter widget used to display a text or image on the screen.
+                            #The Label widget is a standard tkinter widget used to display a text or image on the screen.
                             panel3.configure(image=imgtk3)
                             panel3.image=imgtk3
                             #The Pack geometry manager packs widgets in rows or columns.
@@ -310,10 +313,10 @@ class login:
                             panel3.place(x=815,y=140)
 
 
-                            #Creates a Tkinter-compatible photo image, which can be used everywhere Tkinter expects an image object.
+                            #Creates a tkinter-compatible photo image, which can be used everywhere tkinter expects an image object.
                             im4 = Image.fromarray(im_out)
                             imgtk4 = ImageTk.PhotoImage(image=im4)
-                            #The Label widget is a standard Tkinter widget used to display a text or image on the screen.
+                            #The Label widget is a standard tkinter widget used to display a text or image on the screen.
                             panel4.configure(image=imgtk4)
                             panel4.image=imgtk4
                             #The Pack geometry manager packs widgets in rows or columns.
@@ -325,11 +328,11 @@ class login:
                             label6.configure(text='FRUIT COUNT : ' + str(fr_c))            
 
 
-                btn1 = Tkinter.Button(root,height=1,width=25,text="SELECT IMAGE",command=select,font=(1),fg='white',bg = 'steel blue')
+                btn1 = tkinter.Button(root,height=1,width=25,text="SELECT IMAGE",command=select,font=(1),fg='white',bg = 'steel blue')
                 btn1.pack()
                 w1 = c.create_window(750,100,window=btn1)
 
-                btn2 = Tkinter.Button(root,height=1,width=25,text="SHOW RESULT",command=result,font=(1),fg='white',bg = 'steel blue')
+                btn2 = tkinter.Button(root,height=1,width=25,text="SHOW RESULT",command=result,font=(1),fg='white',bg = 'steel blue')
                 btn2.pack()
                 w2 = c.create_window(750,620,window=btn2)
 
@@ -338,7 +341,7 @@ class login:
               tkMessageBox.showerror("Error","Wrong Credentials...!!\n\nPlease enter again")
             
          
-root = Tkinter.Tk()
+root = tkinter.Tk()
 root.title("Fruit Classifier")
 root.geometry("1920x1200")
 login_screen=login(root)
